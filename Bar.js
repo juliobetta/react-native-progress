@@ -25,6 +25,7 @@ export default class ProgressBar extends Component {
     // eslint-disable-next-line react/forbid-prop-types
     animationConfig: PropTypes.object.isRequired,
     animationType: PropTypes.oneOf(['decay', 'timing', 'spring']),
+    applyInnerBorder: false,
   };
 
   static defaultProps = {
@@ -50,6 +51,7 @@ export default class ProgressBar extends Component {
         props.indeterminate ? INDETERMINATE_WIDTH_FACTOR : progress
       ),
       animationValue: new Animated.Value(BAR_WIDTH_ZERO_POSITION),
+      applyInnerBorder,
     };
   }
 
@@ -141,6 +143,7 @@ export default class ProgressBar extends Component {
     const progressStyle = {
       backgroundColor: color,
       height,
+      borderRadius: applyInnerBorder ? borderRadius : 0,
       transform: [
         {
           translateX: this.state.animationValue.interpolate({
